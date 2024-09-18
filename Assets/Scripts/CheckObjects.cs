@@ -23,7 +23,7 @@ public class CheckObjects : MonoBehaviour
         else if(other.tag != targetTag)
         {
             Debug.Log("Wrong tag");
-            controller.SendHapticImpulse(1.0f, 1.0f);
+            controller.SendHapticImpulse(1.0f, 5.0f);
             ObjectsManager.instance.CheckDespawnTime();
         }
     }

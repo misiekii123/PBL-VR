@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Easy
   m_EditorClassIdentifier: Assembly-CSharp::Difficulty
-  duration: 0
-  amount: 0
+  duration: 10
+  amount: 1

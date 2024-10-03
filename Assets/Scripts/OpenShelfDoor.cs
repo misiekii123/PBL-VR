@@ -5,7 +5,6 @@ public class OpenShelfDoor : MonoBehaviour
 {
     public float rotationSpeed = 2f; 
     private ObjectsManager objectsManager; 
-    private Coroutine closeCoroutine; 
 
     private void Start()
     {
@@ -18,16 +17,9 @@ public class OpenShelfDoor : MonoBehaviour
     }
 
     public void Open()
-    {
-        if (closeCoroutine != null)
-        {
-            StopCoroutine(closeCoroutine);
-        }
-
+    { 
         StopAllCoroutines();
         StartCoroutine(RotateToAngle(90));
-
-        closeCoroutine = StartCoroutine(CloseAfterDelay(objectsManager.timeToClose));
     }
 
     public void Close()
@@ -50,11 +42,5 @@ public class OpenShelfDoor : MonoBehaviour
         }
 
         transform.rotation = endRotation; 
-    }
-
-    private IEnumerator CloseAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        Close();
     }
 }

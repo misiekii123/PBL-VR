@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,8 @@ public class ObjectsManager : MonoBehaviour
     private List<GameObject> currentObjects = new List<GameObject>();
     private Coroutine currentCoroutine;
 
+    private DataSaver DataSaver;
+
     public float timeToClose;
     void Start()
     {
@@ -41,11 +44,18 @@ public class ObjectsManager : MonoBehaviour
         {
             CreateObject();
         }
+
+        if (DataSaver == null)
+            DataSaver = new DataSaver();
+
+        string startGameTimestamp = DataSaver.GetTimestamp(DateTime.Now);
+        DataSaver.startTimestamp = startGameTimestamp;
+        DataSaver.correctTag = GameManager.instance.selectedTag;
     }
 
     private void CreateObject()
     {
-        prefab = prefabs[Random.Range(0, prefabs.Length)];
+        prefab = prefabs[UnityEngine.Random.Range(0, prefabs.Length)];
         GameObject obj = Instantiate(prefab, transform.localPosition, Quaternion.identity, transform);
         currentObjects.Add(obj);
 
@@ -61,8 +71,8 @@ public class ObjectsManager : MonoBehaviour
 
     private void GenerateObjectPosition(GameObject obj)
     {
-        currentX = xValues[Random.Range(0, xValues.Length)];
-        currentY = yValues[Random.Range(0, yValues.Length)];
+        currentX = xValues[UnityEngine.Random.Range(0, xValues.Length)];
+        currentY = yValues[UnityEngine.Random.Range(0, yValues.Length)];
         targetPosition = new Vector3(currentX, currentY, currentZ);
         obj.transform.localPosition = targetPosition;
     }
@@ -80,7 +90,10 @@ public class ObjectsManager : MonoBehaviour
     {
         despawnTime = Time.time;
         reactionTime = despawnTime - spawnTime;
-        Debug.Log(reactionTime);
+
+        DataSaver.selectedTag = CheckObjects.instance.currentTag;
+        DataSaver.reactionTime = reactionTime;
+        DataSaver.SaveToFile();
 
         if (currentObjects.Count > 0)
         {

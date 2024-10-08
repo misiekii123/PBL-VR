@@ -13,7 +13,9 @@ class Difficulty : ScriptableObject
 public class ObjectsManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] prefabs;
+    [SerializeField] private Difficulty[] difficulties;
     [SerializeField] private Difficulty difficulty;
+
     private GameObject prefab;
     public static ObjectsManager instance;
 
@@ -33,8 +35,11 @@ public class ObjectsManager : MonoBehaviour
     private DataSaver DataSaver;
 
     public float timeToClose;
-    void Start()
+    void Awake()
     {
+        if (GameManager.instance.selectedLevel >= 0 && GameManager.instance.selectedLevel <= difficulties.Length) 
+            difficulty = difficulties[GameManager.instance.selectedLevel];
+
         timeToClose = difficulty.duration;
 
         if (instance == null)

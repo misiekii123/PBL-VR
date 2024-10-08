@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Medium
   m_EditorClassIdentifier: Assembly-CSharp::Difficulty
   duration: 10
-  amount: 2
+  amount: 1

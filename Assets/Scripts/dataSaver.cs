@@ -7,7 +7,7 @@ using UnityEngine;
 public class DataSaver
 {
     public float reactionTime;
-    public string selectedTag = "";
+    public string selectedTag;
     public string correctTag;
     private string timestamp;
     public string startTimestamp;

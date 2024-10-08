@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Hard
   m_EditorClassIdentifier: Assembly-CSharp::Difficulty
   duration: 8
-  amount: 3
+  amount: 2

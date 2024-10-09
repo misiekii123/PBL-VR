@@ -3,30 +3,31 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public int selectedLevel;
+    public static MenuManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+
+        DontDestroyOnLoad(this);
+    }
     public void SelectEasy()
     {
-        if (GameManager.instance != null)
-        {
-            GameManager.instance.selectedLevel = 0; // Easy
-        }
+        selectedLevel = 0; // Easy
         SceneManager.LoadScene("Main");
     }
 
     public void SelectMedium()
     {
-        if (GameManager.instance != null)
-        {
-            GameManager.instance.selectedLevel = 1; // Medium
-        }
+        selectedLevel = 1; // Medium
         SceneManager.LoadScene("Main");
     }
 
     public void SelectHard()
     {
-        if (GameManager.instance != null)
-        {
-            GameManager.instance.selectedLevel = 2; // Hard
-        }
+        selectedLevel = 2; // Hard
         SceneManager.LoadScene("Main");
     }
 }

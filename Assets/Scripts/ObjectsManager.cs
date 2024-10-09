@@ -3,18 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Difficulty", menuName = "Difficulty", order = 0)]
-class Difficulty : ScriptableObject
-{
-    public float duration;
-    public float amount;
-}
 
 public class ObjectsManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] prefabs;
-    [SerializeField] private Difficulty[] difficulties;
-    [SerializeField] private Difficulty difficulty;
+    [SerializeField] private Level[] difficulties = { Level.Easy, Level.Medium, Level.Hard };
+    [SerializeField] private Level difficulty;
 
     private GameObject prefab;
     public static ObjectsManager instance;
@@ -34,18 +28,18 @@ public class ObjectsManager : MonoBehaviour
 
     private DataSaver DataSaver;
 
-    public float timeToClose;
-    void Awake()
+    void Start()
     {
-        if (GameManager.instance.selectedLevel >= 0 && GameManager.instance.selectedLevel <= difficulties.Length) 
-            difficulty = difficulties[GameManager.instance.selectedLevel];
+        Debug.Log(MenuManager.instance.selectedLevel);
+        Debug.Log(Level.Easy.amount + "   " + Level.Easy.duration);
 
-        timeToClose = difficulty.duration;
+        if (MenuManager.instance.selectedLevel >= 0 && MenuManager.instance.selectedLevel <= difficulties.Length) 
+            difficulty = difficulties[MenuManager.instance.selectedLevel];
 
         if (instance == null)
             instance = this;
 
-        for (int i = 0; i < difficulty.amount; i++)
+        for (int i = 0; i < difficulty.amount; i++) 
         {
             CreateObject();
         }

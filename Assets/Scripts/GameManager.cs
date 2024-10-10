@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [Header("Score")]
     public int points;
     [SerializeField] private TMP_Text text;
+    [SerializeField] private TMP_Text tagText;
 
     private void Awake()
     {
@@ -24,6 +25,17 @@ public class GameManager : MonoBehaviour
         
         points = 0;
         if(text != null) text.text = points.ToString();
+    }
+
+    private void Start()
+    {
+        tagText.text = selectedTag;
+        StartCoroutine(HideTextAfterDelay(5f));
+    }
+    private IEnumerator HideTextAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        tagText.text = "";
     }
 
     public int getPoints()

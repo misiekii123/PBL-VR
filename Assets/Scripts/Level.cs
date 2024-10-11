@@ -12,6 +12,6 @@ class Level
     }
 
     public static Level Easy = new Level(12f, 1);
-    public static Level Medium = new Level(10f, 1);
+    public static Level Medium = new Level(10f, 2);
     public static Level Hard = new Level(8f, 2);
 }

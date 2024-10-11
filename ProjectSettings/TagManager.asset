@@ -5,11 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Anchor
-  - Food
-  - Office Materials
-  - Kitchen Utensils
-  - Sports
-  - Electronics
+  - Elektronika
+  - Jedzenie
+  - "Materia\u0142y biurowe"
+  - Akcesoria kuchenne
+  - Sporty
   layers:
   - Default
   - TransparentFX

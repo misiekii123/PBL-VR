@@ -22,7 +22,6 @@ public class CheckObjects : MonoBehaviour
         if (other.tag == targetTag)
         {
             currentTag = other.tag;
-            Debug.Log("CORRECT TAG" + currentTag + "   " + other.tag);
             GameManager.instance.setPoints(GameManager.instance.points += 1);
             ObjectsManager.instance.CheckDespawnTime();
             currentTag = null;
@@ -30,8 +29,7 @@ public class CheckObjects : MonoBehaviour
         else if(other.tag != targetTag)
         {
             currentTag = other.tag;
-            Debug.Log("WRONG TAG" + currentTag + "   " + other.tag);
-            controller.SendHapticImpulse(1.0f, 5.0f);
+            controller.SendHapticImpulse(1.0f, 2.0f);
             ObjectsManager.instance.CheckDespawnTime();
             currentTag = null;
         }

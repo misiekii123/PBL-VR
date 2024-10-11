@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text text;
     [SerializeField] private TMP_Text tagText;
 
+    private MenuManager menuManager;
+
     private void Awake()
     {
         if(instance == null)
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         tagText.text = selectedTag;
         StartCoroutine(HideTextAfterDelay(5f));
+        menuManager = FindObjectOfType<MenuManager>();
     }
     private IEnumerator HideTextAfterDelay(float delay)
     {
@@ -47,5 +50,11 @@ public class GameManager : MonoBehaviour
     {
         points = p;
         if(text != null) text.text = "Poprawne: " + points.ToString();
+    }
+
+    public void exitToMenu()
+    {
+        Destroy(menuManager);
+        SceneManager.LoadScene("Menu");
     }
 }

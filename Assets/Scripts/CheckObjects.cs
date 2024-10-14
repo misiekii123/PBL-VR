@@ -19,18 +19,18 @@ public class CheckObjects : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        currentTag = other.tag;
+
         if (other.tag == targetTag)
         {
-            currentTag = other.tag;
-            GameManager.instance.setPoints(GameManager.instance.points += 1);
             ObjectsManager.instance.CheckDespawnTime();
+            GameManager.instance.setPoints(GameManager.instance.points += 1);
             currentTag = null;
         }
         else if(other.tag != targetTag)
         {
-            currentTag = other.tag;
-            controller.SendHapticImpulse(1.0f, 2.0f);
             ObjectsManager.instance.CheckDespawnTime();
+            controller.SendHapticImpulse(1.0f, 1.0f);
             currentTag = null;
         }
     }

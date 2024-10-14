@@ -19,7 +19,7 @@ public class DataSaver
 
     public object GenerateDataEntry()
     {
-        timestamp = GetTimestamp(DateTime.Now); 
+        timestamp = GetTimestamp(DateTime.Now);
 
         return new
         {
@@ -32,27 +32,32 @@ public class DataSaver
 
     public void SaveToFile()
     {
-        string fileName = $"{startTimestamp}.json";
-        string fullPath = Path.Combine(Application.persistentDataPath, fileName);
-
-        List<object> existingData = new List<object>();
-
-        if (File.Exists(fullPath))
+        if (selectedTag != "Untagged")
         {
-            string existingJson = File.ReadAllText(fullPath);
+            string fileName = $"{startTimestamp}.json";
+            string fullPath = Path.Combine(Application.persistentDataPath, fileName);
 
-            if (!string.IsNullOrWhiteSpace(existingJson))
+            List<object> existingData = new List<object>();
+
+            if (File.Exists(fullPath))
             {
-                existingData = JsonConvert.DeserializeObject<List<object>>(existingJson);
+                string existingJson = File.ReadAllText(fullPath);
+
+                if (!string.IsNullOrWhiteSpace(existingJson))
+                {
+                    existingData = JsonConvert.DeserializeObject<List<object>>(existingJson);
+                }
             }
+
+            existingData.Add(GenerateDataEntry());
+
+            string updatedJson = JsonConvert.SerializeObject(existingData, Formatting.Indented);
+
+            File.WriteAllText(fullPath, updatedJson);
         }
-
-        existingData.Add(GenerateDataEntry());
-
-        string updatedJson = JsonConvert.SerializeObject(existingData, Formatting.Indented);
-
-        File.WriteAllText(fullPath, updatedJson);
-
-        Debug.Log($"Dane zapisane w pliku: {fullPath}");
+        else
+        {
+            Debug.Log("Data not saved: selectedTag is 'Untagged'.");
+        }
     }
 }

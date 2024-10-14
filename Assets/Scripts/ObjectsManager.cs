@@ -30,9 +30,6 @@ public class ObjectsManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(MenuManager.instance.selectedLevel);
-        Debug.Log(Level.Easy.amount + "   " + Level.Easy.duration);
-
         if (MenuManager.instance.selectedLevel >= 0 && MenuManager.instance.selectedLevel <= difficulties.Length) 
             difficulty = difficulties[MenuManager.instance.selectedLevel];
 
